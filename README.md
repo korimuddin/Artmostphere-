@@ -1,9 +1,10 @@
-
-
 Welcome YC to our Artmostphere project intro page
 
 <img width="1254" height="1064" alt="image" src="https://github.com/user-attachments/assets/e183969b-e77b-4abe-b444-e73aad4c0f2b" />
 ![A1 gallery](https://github.com/user-attachments/assets/7fec8bce-c3c4-4e42-b88c-423048c6e8bb) ![A2](https://github.com/user-attachments/assets/c90ddc53-f5d4-4f0f-93e8-fa1406102bc0)
+
+
+
 
 
 Contents:
@@ -15,8 +16,8 @@ Deliverables
 
 
 
-Problem-Solution
 
+Problem-Solution
 Problem: Currently, artists across all major social media platforms direct users away from their content through bio links to separate websites. 
 Solution: Artmostphere will provide artists with curated virtual galleries within a unified platform where customers can discover new work and purchase from the same site.
 
@@ -34,7 +35,7 @@ Current status & Execution
 Link to web app in early stages of development: 
 https://app--artrium-61e2cc51.base44.app/Collection
 
-3d scans captured with Gaussian Splattinng:
+
 
 
 Deliverables
