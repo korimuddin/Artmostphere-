@@ -1,4 +1,4 @@
-# Mobile-curator-app-v1.1
-Curator app mobile
+Artmostphere web app - stil under development
 
-link to app: https://app--curator-4bc22898.base44.app
+link to app: 
+https://app--artrium-61e2cc51.base44.app/Collection
