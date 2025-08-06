@@ -7,24 +7,6 @@ Welcome YC to our Artmostphere project intro page
 
 
 
-Contents:
-
-Problem-Solution
-
-R&D
-
-Current status & Execution
-
-Deliverables
-
-
-
-
-
-
-
-
-
 Problem-Solution
 
 Problem: 
@@ -49,10 +31,9 @@ Current status & Execution
 Link to web app in early stages of development: 
 https://app--artrium-61e2cc51.base44.app/Collection
 
+Gallery 1 has been created and is being rendered on blender 
+Gallery 2 & 3 are in development - to be completed by end of week
 
-
-
-Deliverables
 
 
 
