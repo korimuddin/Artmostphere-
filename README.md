@@ -22,6 +22,9 @@ Deliverables
 
 
 
+
+
+
 Problem-Solution
 
 Problem: 
@@ -32,7 +35,9 @@ Artmostphere will provide artists with curated virtual galleries within a unifie
 
 
 R&D
+
 Photogrammetry used to create 3d scans 
+
 ![Untitled video (2)](https://github.com/user-attachments/assets/581af5ee-4526-4812-98ef-e84f2e3bd8d4)
 ![Untitled video (3)](https://github.com/user-attachments/assets/5c0f00f2-cd73-4f1e-9fc5-395b52b5d661)
 ![Untitled video (4)](https://github.com/user-attachments/assets/2b7448b2-2561-4dc3-a3a0-92e13ad8dc4a)
