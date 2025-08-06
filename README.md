@@ -23,8 +23,12 @@ Deliverables
 
 
 Problem-Solution
-Problem: Currently, artists across all major social media platforms direct users away from their content through bio links to separate websites. 
-Solution: Artmostphere will provide artists with curated virtual galleries within a unified platform where customers can discover new work and purchase from the same site.
+
+Problem: 
+Currently, artists across all major social media platforms direct users away from their content through bio links to separate websites. 
+
+Solution: 
+Artmostphere will provide artists with curated virtual galleries within a unified platform where customers can discover new work and purchase from the same site.
 
 
 R&D
