@@ -8,10 +8,15 @@ Welcome YC to our Artmostphere project intro page
 
 
 Contents:
+
 Problem-Solution
+
 R&D
+
 Current status & Execution
+
 Deliverables
+
 
 
 
@@ -45,13 +50,4 @@ Deliverables
 
 
 
-Mission statement:
-To empower artists and photographers by providing immersive, beautifully designed virtual gallery spaces that unify discovery and commerce.
 
-
-Problem - no single marketplace for artists to showcase & sell their work
-
-C
-
-
-Artmostphere web app - stil under development
