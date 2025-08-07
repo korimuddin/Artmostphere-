@@ -1,7 +1,10 @@
 Welcome YC to our Artmostphere project intro page
 
-<img width="1254" height="1064" alt="image" src="https://github.com/user-attachments/assets/e183969b-e77b-4abe-b444-e73aad4c0f2b" />
-![A1 gallery](https://github.com/user-attachments/assets/7fec8bce-c3c4-4e42-b88c-423048c6e8bb) ![A2](https://github.com/user-attachments/assets/c90ddc53-f5d4-4f0f-93e8-fa1406102bc0)
+<img width="1432" height="1196" alt="Screenshot 2025-08-07 121119" src="https://github.com/user-attachments/assets/af83e8cf-0ddf-4e93-b991-cacf9b7493e4" />
+<img width="2070" height="1193" alt="Screenshot 2025-08-07 121200" src="https://github.com/user-attachments/assets/3d515858-82c3-432c-a884-8fae307e2f66" />
+<img width="2110" height="1205" alt="Screenshot 2025-08-07 121300" src="https://github.com/user-attachments/assets/faf8d9e5-ef41-4f5c-ac91-f7ad6aaba733" />
+<img width="1320" height="1170" alt="Screenshot 2025-08-07 121041" src="https://github.com/user-attachments/assets/5c7710c6-7e62-4cf9-a07a-1f31751ce3e4" />
+![Uploading Untitled video (5).gif…]()
 
 
 
