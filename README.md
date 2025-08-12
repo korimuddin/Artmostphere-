@@ -9,7 +9,382 @@ Welcome YC to our Artmostphere project intro page
 
 
 
-[Uploading artmostphere-upload-gallery.html…]()
+[Upl<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Artmostphere – Upload to 3D Gallery Animation</title>
+<style>
+  :root{
+    --bg:#0b0f14;
+    --panel:#121821;
+    --muted:#2a3443;
+    --muted-2:#39485e;
+    --accent:#7bdcff;
+    --accent-2:#86ffa8;
+    --text:#e9f1ff;
+    --soft:#b8c7e6;
+    --gold:#d7b471;
+    --frame:#1a1f27;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 800px at 80% -10%, #152033 15%, transparent 60%),
+      radial-gradient(1000px 700px at -10% 110%, #0d1523 15%, transparent 60%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .app{height:100%; display:grid; place-items:center; padding:24px}
+  h1.logo{
+    margin:0 0 12px 0;
+    letter-spacing:.5px;
+    font-weight:700;
+    display:flex; gap:.6ch; align-items:center; justify-content:center;
+  }
+  .logo .mark{
+    width:28px; height:28px; border-radius:6px;
+    background: conic-gradient(from 180deg at 50% 50%, #8cf 0 25%, #8fa 0 50%, #fd8 0 75%, #f8a 0 100%);
+    box-shadow: inset 0 0 10px rgba(0,0,0,.25), 0 6px 20px rgba(0,0,0,.35);
+    transform:rotate(8deg);
+  }
+  .subtitle{margin:0 0 26px 0; color:var(--soft); font-size:.95rem; text-align:center}
+
+  /* Stage containers */
+  .stage{
+    width:min(980px, 92vw);
+    height:min(560px, 64vh);
+    position:relative;
+    border-radius:18px;
+    background:linear-gradient(180deg, #0f1624, #0b111b);
+    box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.05);
+    overflow:hidden;
+  }
+
+  /* ===== Upload stage ===== */
+  .browser{
+    position:absolute; inset:24px;
+    border-radius:14px;
+    background:
+      radial-gradient(90% 100% at 70% -10%, rgba(135,206,250,.06), transparent 60%),
+      linear-gradient(180deg, #121a29, #0e1522 70%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), var(--shadow);
+    overflow:hidden;
+  }
+  .browser .chrome{
+    height:46px; display:flex; align-items:center; gap:10px; padding:0 12px;
+    background:linear-gradient(180deg,#152033,#111a2a);
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .dot{width:10px; height:10px; border-radius:50%}
+  .dot.red{background:#ff6961}.dot.yellow{background:#ffd36e}.dot.green{background:#95e37a}
+  .address{
+    flex:1; height:28px; border-radius:8px; display:flex; align-items:center; gap:8px;
+    padding:0 10px;
+    background:#0d1523; color:#9fb3d9; font-size:.9rem;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  .address b{color:#cfe5ff}
+  .content{
+    position:absolute; inset:56px 16px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:18px;
+  }
+  .panel{
+    border-radius:12px; background:linear-gradient(180deg,#0d1523,#0a111c);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+    padding:16px; position:relative;
+  }
+  .panel h3{margin:0 0 10px 0; font-weight:600; color:#cfe5ff; font-size:1rem}
+  .dropzone{
+    height:100%; border:2px dashed #2e3a50; border-radius:12px;
+    display:grid; place-items:center; position:relative; overflow:hidden;
+    background:
+      radial-gradient(600px 300px at 80% -10%, rgba(123,220,255,.08), transparent 60%),
+      radial-gradient(600px 300px at 10% 110%, rgba(134,255,168,.06), transparent 60%);
+  }
+  .hint{position:absolute; bottom:10px; left:0; right:0; text-align:center; color:#9fb3d9; font-size:.85rem; opacity:.8}
+  .card{
+    width:160px; aspect-ratio:4/3; border-radius:10px; overflow:hidden; position:absolute;
+    box-shadow: 0 8px 25px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.1);
+    transform: translateY(-120%) scale(.9) rotate(-6deg);
+    transition: transform 900ms cubic-bezier(.2,.8,.2,1);
+    background:#0b0f14;
+  }
+  .card.in{ transform: translateY(0) scale(1) rotate(0deg); }
+  .card .thumb{width:100%; height:100%; display:block; background:#111a28}
+  .card .thumb svg{width:100%; height:100%; display:block}
+  .progress-wrap{
+    position:absolute; left:16px; right:16px; bottom:16px; height:12px; border-radius:999px;
+    background:#0a0f18; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    overflow:hidden;
+  }
+  .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent-2));
+       transition: width 1.6s cubic-bezier(.2,.8,.2,1);}
+  .ok{position:absolute; right:10px; bottom:36px; font-size:.9rem; color:#9ff5b5; opacity:0; transition:opacity .4s}
+  .ok.show{opacity:1}
+
+  .info{
+    display:grid; gap:12px; align-content:start;
+  }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px; padding:10px 12px;
+    border-radius:10px; background:#0e1624; color:#cfe5ff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    font-size:.95rem;
+  }
+  .pill .mini{width:26px; height:26px; border-radius:6px; background:linear-gradient(135deg,#7bdcff,#86ffa8)}
+  .small{color:#9fb3d9; font-size:.9rem}
+
+  /* ===== Gallery stage (CSS 3D) ===== */
+  .gallery-stage{display:grid; place-items:center; background: radial-gradient(1200px 600px at 50% -10%, rgba(123,220,255,.08), transparent 60%), #0a0f17;}
+  .scene{width:100%; height:100%; perspective:1100px; transform-style:preserve-3d; position:relative;}
+  .camera{
+    position:absolute; inset:0; transform-style:preserve-3d;
+    transform: translateZ(650px) rotateX(4deg); /* starting position */
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+  }
+  .camera.tour{
+    animation: camTour 8s ease-in-out 0.2s both;
+  }
+  @keyframes camTour{
+    0%{ transform: translateZ(650px) rotateX(4deg) rotateY(-8deg) translateX(-60px); }
+    30%{ transform: translateZ(520px) rotateX(3deg) rotateY(0deg) translateX(0px); }
+    60%{ transform: translateZ(460px) rotateX(2deg) rotateY(8deg) translateX(40px); }
+    100%{ transform: translateZ(520px) rotateX(3deg) rotateY(0deg) translateX(0px); }
+  }
+  .room{
+    position:absolute; top:50%; left:50%; width:900px; height:520px; transform-style:preserve-3d;
+    transform: translate3d(-50%,-50%, -600px) rotateX(0deg);
+  }
+  .wall, .floor, .ceiling{
+    position:absolute; transform-style:preserve-3d; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .wall{ width:900px; height:520px; background:linear-gradient(180deg,#0f1522,#0c121c);}
+  .back{ transform: translateZ(-300px); }
+  .left{ transform: rotateY(90deg) translateZ(450px); width:600px; height:520px; background:linear-gradient(180deg,#0e1420,#0b111a);}
+  .right{ transform: rotateY(-90deg) translateZ(450px); width:600px; height:520px; background:linear-gradient(180deg,#0e1420,#0b111a);}
+  .floor{
+    width:900px; height:600px; background:linear-gradient(180deg,#0a0f17,#0b0f14);
+    transform: rotateX(90deg) translateZ(260px);
+    box-shadow: inset 0 0 120px rgba(0,0,0,.6);
+  }
+  .ceiling{
+    width:900px; height:600px; background:linear-gradient(180deg,#0f1624,#0b111b);
+    transform: rotateX(-90deg) translateZ(260px);
+    box-shadow: inset 0 0 60px rgba(255,255,255,.04);
+  }
+
+  .frame{
+    position:absolute; width:260px; height:190px; border:14px solid var(--frame);
+    outline:2px solid rgba(255,255,255,.06);
+    border-radius:8px; background:#0a0f17;
+    box-shadow: 0 16px 40px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
+    overflow:hidden;
+  }
+  .back .frame:nth-child(1){ left:90px; top:110px }
+  .back .frame:nth-child(2){ left:320px; top:70px; width:300px; height:220px }
+  .back .frame:nth-child(3){ left:650px; top:110px }
+
+  .art{position:absolute; inset:0; background:#111a28; background-size:cover; background-position:center}
+  .art.glow::after{
+    content:""; position:absolute; inset:-30px;
+    background: radial-gradient(350px 180px at 50% 50%, rgba(255,255,255,.06), transparent 70%);
+    pointer-events:none;
+  }
+
+  .caption{
+    position:absolute; top:310px; width:100%; text-align:center; color:#c8d7f0; font-size:.95rem;
+  }
+
+  .hidden{opacity:0; pointer-events:none}
+  .show{opacity:1; pointer-events:auto}
+  .fade{
+    transition: opacity 800ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .controls{
+    position:absolute; right:18px; bottom:18px; display:flex; gap:10px;
+  }
+  button{
+    appearance:none; border:0; border-radius:10px; padding:10px 14px; font-weight:600;
+    background:#182233; color:#cfe5ff; cursor:pointer;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  button:hover{filter:brightness(1.1)}
+  button:active{transform:translateY(1px)}
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .card{transition:none}
+    .bar{transition:none}
+    .fade{transition:none}
+    .camera{animation:none !important; transition:none !important}
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <div>
+      <h1 class="logo"><span class="mark"></span> Artmostphere</h1>
+      <p class="subtitle">Animation: upload an image → see it displayed in a 3D virtual gallery.</p>
+    </div>
+
+    <!-- Upload Stage -->
+    <section class="stage upload-stage fade show" aria-label="Upload to Artmostphere">
+      <div class="browser">
+        <div class="chrome">
+          <span class="dot red" aria-hidden="true"></span>
+          <span class="dot yellow" aria-hidden="true"></span>
+          <span class="dot green" aria-hidden="true"></span>
+          <div class="address" aria-label="Address bar">
+            https://<b>artmostphere</b>.com / upload
+          </div>
+        </div>
+        <div class="content">
+          <div class="panel" role="region" aria-label="Upload panel">
+            <h3>Drop your image</h3>
+            <div class="dropzone" aria-live="polite">
+              <div class="card" id="card">
+                <div class="thumb" aria-label="Selected image thumbnail">
+                  <!-- Inline SVG placeholder artwork -->
+                  <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mountain landscape">
+                    <defs>
+                      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#88c5ff"/>
+                        <stop offset="1" stop-color="#2b3f66"/>
+                      </linearGradient>
+                      <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#9fe8ff"/>
+                        <stop offset="1" stop-color="#86ffa8"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="160" height="120" fill="url(#g1)"/>
+                    <circle cx="34" cy="28" r="12" fill="url(#g2)" opacity="0.9"/>
+                    <path d="M10 100 L50 48 L70 74 L90 56 L150 100 Z" fill="#d7b471" opacity="0.9"/>
+                    <path d="M10 100 L50 48 L70 74 L90 56 L150 100 Z" fill="#947a48" opacity="0.6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="hint">Simulated upload — watch the progress bar</div>
+              <div class="progress-wrap" aria-label="Upload progress">
+                <div class="bar" id="bar"></div>
+              </div>
+              <div class="ok" id="ok">Uploaded to Artmostphere ✓</div>
+            </div>
+          </div>
+          <div class="panel info" role="region" aria-label="Info">
+            <div class="pill"><span class="mini" aria-hidden="true"></span> Secure upload</div>
+            <div class="pill"><span class="mini" aria-hidden="true"></span> Auto-framed in gallery</div>
+            <div class="small">This demo shows the journey from upload to display inside a CSS‑3D virtual gallery—no external libraries required.</div>
+            <div class="small">Use the “Replay” button anytime.</div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="replay1" type="button">Replay</button>
+        <button id="toGallery" type="button" aria-label="Skip to gallery">Skip ▶</button>
+      </div>
+    </section>
+
+    <!-- Gallery Stage -->
+    <section class="stage gallery-stage fade hidden" aria-label="3D Gallery">
+      <div class="scene">
+        <div class="camera" id="camera">
+          <div class="room">
+            <div class="wall back">
+              <div class="frame"><div class="art" id="art-left"></div></div>
+              <div class="frame"><div class="art glow" id="art-center"></div></div>
+              <div class="frame"><div class="art" id="art-right"></div></div>
+              <div class="caption" aria-hidden="true">Your image — now on the wall ✨</div>
+            </div>
+            <div class="wall left"></div>
+            <div class="wall right"></div>
+            <div class="floor"></div>
+            <div class="ceiling"></div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="replay2" type="button">Replay</button>
+      </div>
+    </section>
+  </div>
+
+<script>
+  // Helper to wait
+  const sleep = (ms)=> new Promise(r=>setTimeout(r, ms));
+
+  // Turn the inline SVG into a data URL so we can re-use it as "art" texture on frames
+  function svgToDataUrl(svgEl){
+    const clone = svgEl.cloneNode(true);
+    // Slight tweak so it fits frames nicely
+    clone.setAttribute("preserveAspectRatio","xMidYMid slice");
+    const svg = new XMLSerializer().serializeToString(clone);
+    const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/"/g, "%22");
+    return "data:image/svg+xml;charset=utf-8," + encoded;
+  }
+
+  async function runAnimation({skipUpload=false}={}){
+    const uploadStage = document.querySelector(".upload-stage");
+    const galleryStage = document.querySelector(".gallery-stage");
+    const card = document.getElementById("card");
+    const bar = document.getElementById("bar");
+    const ok = document.getElementById("ok");
+    const camera = document.getElementById("camera");
+    const svg = card.querySelector("svg");
+    const texture = svgToDataUrl(svg);
+
+    // Reset states
+    uploadStage.classList.remove("hidden"); uploadStage.classList.add("show");
+    galleryStage.classList.add("hidden");  galleryStage.classList.remove("show");
+    camera.classList.remove("tour");
+    card.classList.remove("in"); bar.style.width="0%"; ok.classList.remove("show");
+
+    // Populate gallery frames
+    document.getElementById("art-left").style.backgroundImage  = `url('${texture}')`;
+    document.getElementById("art-center").style.backgroundImage= `url('${texture}')`;
+    document.getElementById("art-right").style.backgroundImage = `url('${texture}')`;
+
+    if(!skipUpload){
+      // Bring the card in
+      await sleep(250);
+      card.classList.add("in");
+      // Progress
+      await sleep(450);
+      bar.style.width = "100%";
+      await sleep(1700);
+      ok.classList.add("show");
+      await sleep(500);
+    }
+
+    // Transition to gallery
+    uploadStage.classList.add("fade");
+    galleryStage.classList.add("fade");
+    uploadStage.classList.remove("show"); uploadStage.classList.add("hidden");
+    galleryStage.classList.remove("hidden"); galleryStage.classList.add("show");
+
+    // Camera tour
+    await sleep(150);
+    camera.classList.add("tour");
+  }
+
+  // Controls
+  document.getElementById("replay1").addEventListener("click", ()=> runAnimation({skipUpload:false}));
+  document.getElementById("toGallery").addEventListener("click", ()=> runAnimation({skipUpload:true}));
+  document.getElementById("replay2").addEventListener("click", ()=> runAnimation({skipUpload:false}));
+
+  // Autostart
+  runAnimation();
+</script>
+</body>
+</html>
+oading artmostphere-upload-gallery.html…]()
+
 
 
 
